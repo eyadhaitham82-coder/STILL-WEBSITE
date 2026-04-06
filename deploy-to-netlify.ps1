@@ -42,3 +42,6 @@ Remove-Item -Recurse -Force $temp
 
 Write-Host "OK: Created $zipPath"
 Write-Host "In Netlify: Site -> Deploys -> Deploy manually -> upload this zip (not the whole project folder)."
+Write-Host ""
+Write-Host "If the website will NOT accept the upload, use the CLI instead (no browser upload):"
+Write-Host "  See NETLIFY-UPLOAD-HELP.txt  and  deploy-netlify-cli.ps1"

@@ -1,0 +1,40 @@
+If Netlify "Deploy manually" / drag-and-drop will not upload
+============================================================
+
+Your site zip is small (~1.5 MB). The problem is usually the browser or network,
+not the file size.
+
+A) Use Netlify CLI (recommended — no browser upload)
+-----------------------------------------------------
+1. Install Node.js LTS: https://nodejs.org
+2. Open PowerShell in this folder (c:\STILL-website)
+3. First time only:
+     npx netlify-cli login
+     npx netlify-cli link
+   (choose your site "stilleg" when asked)
+4. Deploy:
+     powershell -ExecutionPolicy Bypass -File .\deploy-netlify-cli.ps1
+
+Or one line after login + link:
+     npx netlify-cli deploy --prod --dir .
+
+B) Connect GitHub (best long-term — no zip at all)
+--------------------------------------------------
+1. Push this project to a GitHub repository.
+2. Netlify: Site settings -> Build & deploy -> Link repository.
+3. Build command: leave empty or use: echo Static site
+4. Publish directory: .
+5. Save — Netlify builds from Git on every push.
+
+C) If you still want drag-and-drop
+----------------------------------
+- Use Google Chrome (fewer upload issues than some browsers).
+- Turn off VPN / ad blockers / strict privacy extensions for app.netlify.com.
+- Upload the FILE still-netlify-upload.zip (create it with deploy-to-netlify.ps1),
+  not a folder, and not a zip of the whole disk.
+- Try another network (phone hotspot) if upload always stalls.
+
+D) Personal access token (advanced — for scripts / CI)
+------------------------------------------------------
+Netlify: User settings -> Applications -> Personal access tokens.
+Then you can use environment variable NETLIFY_AUTH_TOKEN with the CLI.

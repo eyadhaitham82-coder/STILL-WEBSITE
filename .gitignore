@@ -7,3 +7,6 @@ package-lock.json
 
 # Local Netlify upload bundle (regenerate with deploy-to-netlify.ps1)
 still-netlify-upload.zip
+
+# Netlify CLI local link (machine-specific)
+.netlify/

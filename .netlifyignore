@@ -5,3 +5,5 @@
 *.lnk
 *.zip
 deploy-to-netlify.ps1
+deploy-netlify-cli.ps1
+NETLIFY-UPLOAD-HELP.txt

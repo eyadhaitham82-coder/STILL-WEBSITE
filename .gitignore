@@ -4,3 +4,6 @@ package-lock.json
 
 # Windows shortcuts in project folder
 *.lnk
+
+# Local Netlify upload bundle (regenerate with deploy-to-netlify.ps1)
+still-netlify-upload.zip

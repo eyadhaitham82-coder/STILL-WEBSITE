@@ -1,4 +1,4 @@
-# Static site — publish from repo root (index.html, cart.html, checkout.html, …)
+# Static site — no compile step. (Netlify runs this on Linux when deploying from Git.)
 [build]
-  command = "true"
+  command = "echo Static site"
   publish = "."

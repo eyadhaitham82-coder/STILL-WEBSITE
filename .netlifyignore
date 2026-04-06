@@ -1,0 +1,7 @@
+# Keep manual/Git deploys smaller — not needed for runtime
+.git
+.gitignore
+.netlifyignore
+*.lnk
+*.zip
+deploy-to-netlify.ps1

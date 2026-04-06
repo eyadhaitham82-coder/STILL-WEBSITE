@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="STILL – Timeless fashion and modern sophistication. Shop the STILL collection: elegant clothing and accessories. Discover New Collection 2026.">
+    <meta name="keywords" content="STILL, STILL fashion, fashion brand, clothing, accessories, elegant fashion, STILL collection, shop STILL">
+    <meta property="og:title" content="STILL | Fashion Collection – Shop Now">
+    <meta property="og:description" content="STILL – Timeless elegance meets modern sophistication. Discover our curated collection.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/index.html">
+    <meta property="og:site_name" content="STILL">
+    <link rel="canonical" href="https://your-domain.com/index.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STILL | Fashion Collection">
+    <meta name="twitter:description" content="STILL – Timeless elegance. Discover our curated collection.">
+    <title>STILL | Fashion Collection – Shop Elegant Clothing &amp; Accessories</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">STILL</a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#collection" class="nav-link">Collection</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" type="button" aria-label="Search">🔍</button>
+                <button class="icon-btn cart-btn" id="cartBtn" aria-label="Cart">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+            <div class="cart-dropdown" id="cartDropdown">
+                <div class="cart-dropdown-header">
+                    <h4>Your Cart</h4>
+                    <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">&times;</button>
+                </div>
+                <div class="cart-items" id="cartItems">
+                    <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+                </div>
+                <div class="cart-dropdown-footer" id="cartFooter" style="display: none;">
+                    <a href="cart.html" class="cart-view-btn" id="cartViewBtn">View Cart</a>
+                    <a href="checkout.html" class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to Checkout</a>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Elevate Your Style</h1>
+            <p class="hero-subtitle">Discover the New Collection 2026</p>
+            <button class="cta-button">Shop Now</button>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section class="featured-collection" id="collection">
+        <div class="container">
+            <h2 class="section-title">Featured Collection</h2>
+            
+            <div class="collection-grid">
+                <!-- Summer Elegance -->
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span class="image-text">Summer Elegance</span>
+                        </div>
+                        <div class="collection-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Summer Elegance</h3>
+                        <p class="price">$299</p>
+                    </div>
+                </div>
+
+                <!-- Urban Chic - This will use the polo shirt image -->
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="urban-chic.jpg" alt="Urban Chic" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
+                        <div class="collection-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Urban Chic</h3>
+                        <p class="price">$349</p>
+                    </div>
+                </div>
+
+                <!-- Minimalist -->
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #30cfd0 0%, #4facfe 100%);">
+                            <span class="image-text">Minimalist</span>
+                        </div>
+                        <div class="collection-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Minimalist</h3>
+                        <p class="price">$279</p>
+                    </div>
+                </div>
+
+                <!-- Evening Glow -->
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <span class="image-text">Evening Glow</span>
+                        </div>
+                        <div class="collection-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Evening Glow</h3>
+                        <p class="price">$399</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">Our Atelier</h2>
+                    <p class="about-text">
+                        Welcome to STILL, where timeless elegance meets modern sophistication. 
+                        Our curated collection brings together the finest materials and craftsmanship, 
+                        creating pieces that transcend seasons and trends.
+                    </p>
+                    <p class="about-text">
+                        Each item is thoughtfully designed to elevate your wardrobe and express 
+                        your unique style with confidence and grace.
+                    </p>
+                    <button class="secondary-button">Learn More</button>
+                </div>
+                <div class="about-image">
+                    <div class="placeholder-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); height: 500px;">
+                        <span class="image-text">Our Atelier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for exclusive offers and style inspiration</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="cta-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">STILL</div>
+                    <p>Redefine fashion with timeless elegance and modern sophistication.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/still_.eg" class="social-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Pinterest</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Collections</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 STILL. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+        <div class="search-overlay-backdrop"></div>
+        <div class="search-overlay-content">
+            <button type="button" class="search-close" id="searchClose" aria-label="Close search">&times;</button>
+            <input type="search" class="search-input" id="searchInput" placeholder="Search collection..." autocomplete="off">
+            <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
+            <p class="search-no-results" id="searchNoResults" style="display: none;">No items match your search.</p>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal" aria-hidden="true">
+        <div class="quick-view-overlay"></div>
+        <div class="quick-view-content">
+            <button class="quick-view-close" aria-label="Close">&times;</button>
+            <div class="quick-view-body">
+                <div class="quick-view-image" id="modalProductImage"></div>
+                <div class="quick-view-details">
+                    <h3 class="quick-view-title" id="modalProductName"></h3>
+                    <p class="quick-view-price" id="modalProductPrice"></p>
+                    <div class="quick-view-sizes">
+                        <span class="quick-view-label">Size:</span>
+                        <div class="size-options">
+                            <button type="button" class="size-btn" data-size="Small">Small</button>
+                            <button type="button" class="size-btn" data-size="Medium">Medium</button>
+                            <button type="button" class="size-btn" data-size="Large">Large</button>
+                        </div>
+                    </div>
+                    <div class="quick-view-quantity" id="quickViewQuantity" style="display: none;">
+                        <span class="quick-view-label">Quantity:</span>
+                        <div class="quick-qty-controls">
+                            <button type="button" class="quick-qty-btn" id="quickQtyDec" aria-label="Decrease quantity">-</button>
+                            <span class="quick-qty-value" id="quickQtyValue">1</span>
+                            <button type="button" class="quick-qty-btn" id="quickQtyInc" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                    <button type="button" class="quick-view-add">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

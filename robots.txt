@@ -1,0 +1,7 @@
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Sitemap helps search engines discover all your pages
+# Replace your-domain.com with your real site URL after you deploy (e.g. still-store.netlify.app)
+Sitemap: https://your-domain.com/sitemap.xml

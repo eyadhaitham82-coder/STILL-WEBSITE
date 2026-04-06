@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Checkout - STILL. Complete your order with secure payment.">
+    <meta property="og:url" content="https://your-domain.com/checkout.html">
+    <link rel="canonical" href="https://your-domain.com/checkout.html">
+    <title>Checkout - STILL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <style>
+        .checkout-page { padding: 8rem 0 4rem; min-height: 60vh; }
+        .checkout-page .container { max-width: 600px; }
+        .checkout-page h1 { font-size: 2rem; margin-bottom: 2rem; color: var(--primary-color); }
+        .checkout-form label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; }
+        .checkout-form input, .checkout-form textarea {
+            width: 100%; padding: 0.75rem 1rem; margin-bottom: 1rem;
+            border: 1px solid var(--medium-gray); border-radius: 4px;
+            font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif; font-size: 1rem;
+        }
+        .checkout-form input:focus, .checkout-form textarea:focus {
+            outline: 2px solid var(--accent-color); border-color: var(--accent-color);
+        }
+        .checkout-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 500px) { .checkout-form .form-row { grid-template-columns: 1fr; } }
+        .checkout-order { background: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        .checkout-order h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+        .checkout-order-item { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.95rem; }
+        .checkout-order-total { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--medium-gray); font-weight: 600; font-size: 1.1rem; }
+        .checkout-submit {
+            width: 100%; padding: 1rem 1.5rem; background: var(--accent-color); color: var(--secondary-color);
+            border: none; font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
+            font-size: 1rem; font-weight: 500; cursor: pointer; border-radius: 4px; transition: var(--transition);
+        }
+        .checkout-submit:hover { background: #7a6549; }
+        .checkout-back { display: inline-block; margin-bottom: 1.5rem; color: var(--accent-color); text-decoration: none; font-size: 0.95rem; }
+        .checkout-back:hover { text-decoration: underline; }
+        .payment-methods { margin-bottom: 1.5rem; }
+        .payment-methods h3 { margin-bottom: 0.75rem; }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--secondary-color);
+        }
+        .payment-option:hover { border-color: var(--accent-color); background: var(--light-gray); }
+        .payment-option.selected { border-color: var(--accent-color); background: rgba(139, 115, 85, 0.08); }
+        .payment-option input { margin: 0; width: 18px; height: 18px; accent-color: var(--accent-color); }
+        .payment-option .payment-label { flex: 1; font-weight: 500; }
+        .payment-option .payment-icon { font-size: 1.5rem; }
+        .visa-form {
+            display: none;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            border: 1px solid var(--medium-gray);
+        }
+        .visa-form.is-visible { display: block; }
+        .visa-form h4 { margin-bottom: 1rem; font-size: 1rem; color: var(--primary-color); }
+        .visa-form .form-row { margin-bottom: 0; }
+        .visa-form input { margin-bottom: 1rem; }
+        .visa-form input:last-of-type { margin-bottom: 0; }
+        .card-hint { font-size: 0.85rem; color: #666; margin-top: -0.5rem; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">STILL</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#collection" class="nav-link">Collection</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">🛒 <span class="cart-count" id="cartCount">0</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="checkout-page">
+        <div class="container">
+            <a href="cart.html" class="checkout-back">← Back to cart</a>
+            <h1>Checkout</h1>
+
+            <div id="checkoutEmpty" style="display: none;">
+                <p style="margin-bottom: 1rem; color: #666;">Your cart is empty. <a href="index.html#collection" style="color: var(--accent-color);">Continue shopping</a>.</p>
+            </div>
+
+            <div id="checkoutContent">
+                <div class="checkout-order" id="checkoutOrder">
+                    <h3>Order summary</h3>
+                    <div id="checkoutItems"></div>
+                    <div class="checkout-order-total" id="checkoutTotal">Subtotal: $0</div>
+                </div>
+
+                <form class="checkout-form" id="checkoutForm" name="checkout" method="POST" action="/thank-you" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="checkout">
+                    <input type="hidden" name="siteSource" value="still-website-checkout">
+                    <input type="hidden" id="orderId" name="orderId" value="">
+                    <input type="hidden" id="orderItems" name="orderItems" value="">
+                    <input type="hidden" id="orderSubtotal" name="orderSubtotal" value="">
+                    <p style="display: none;">
+                        <label>Don't fill this out: <input name="bot-field"></label>
+                    </p>
+                    <h3 style="margin-bottom: 1rem;">Shipping details</h3>
+                    <div class="form-row">
+                        <div>
+                            <label for="firstName">First name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div>
+                            <label for="lastName">Last name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div>
+                            <label for="zip">ZIP / Postal code</label>
+                            <input type="text" id="zip" name="zip" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="notes">Order notes (optional)</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Special instructions..."></textarea>
+                    </div>
+
+                    <div class="payment-methods">
+                        <h3>Payment method</h3>
+                        <label class="payment-option selected" id="paymentOptionCash" tabindex="0">
+                            <input type="radio" name="paymentMethod" value="cash" checked>
+                            <span class="payment-icon">💵</span>
+                            <span class="payment-label">Cash on delivery</span>
+                        </label>
+                        <label class="payment-option" id="paymentOptionVisa" tabindex="0">
+                            <input type="radio" name="paymentMethod" value="visa">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-label">Visa / Card</span>
+                        </label>
+                        <div class="visa-form" id="visaForm">
+                            <h4>Card details</h4>
+                            <p class="card-hint">Enter your card information.</p>
+                            <div>
+                                <label for="cardNumber">Card number</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number">
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label for="cardExpiry">Expiry (MM/YY)</label>
+                                    <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+                                </div>
+                                <div>
+                                    <label for="cardCvv">CVV</label>
+                                    <input type="text" id="cardCvv" name="cardCvv" placeholder="123" maxlength="4" autocomplete="cc-csc">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="cardName">Name on card</label>
+                                <input type="text" id="cardName" name="cardName" placeholder="As shown on card" autocomplete="cc-name">
+                            </div>
+                        </div>
+                    </div>
+                    <div data-netlify-recaptcha="true"></div>
+
+                    <button type="submit" class="checkout-submit">Place order</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const CART_KEY = 'still-cart';
+        let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+        function parsePrice(str) {
+            const num = str.replace(/[^0-9.]/g, '');
+            return parseFloat(num) || 0;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        const cartCount = document.getElementById('cartCount');
+        const checkoutEmpty = document.getElementById('checkoutEmpty');
+        const checkoutContent = document.getElementById('checkoutContent');
+        const checkoutItems = document.getElementById('checkoutItems');
+        const checkoutTotal = document.getElementById('checkoutTotal');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const orderItemsField = document.getElementById('orderItems');
+        const orderSubtotalField = document.getElementById('orderSubtotal');
+
+        cart = cart.map(item => ({
+            ...item,
+            qty: Math.max(1, parseInt(item.qty, 10) || 1)
+        }));
+
+        if (cartCount) {
+            cartCount.textContent = cart.reduce((sum, item) => sum + (parseInt(item.qty, 10) || 1), 0);
+        }
+
+        if (cart.length === 0) {
+            checkoutEmpty.style.display = 'block';
+            checkoutContent.style.display = 'none';
+        } else {
+            let total = 0;
+            checkoutItems.innerHTML = cart.map(item => {
+                const priceNum = parsePrice(item.price);
+                const qty = Math.max(1, parseInt(item.qty, 10) || 1);
+                total += priceNum * qty;
+                return `<div class="checkout-order-item"><span>${escapeHtml(item.name)} (${escapeHtml(item.size)}) x ${qty}</span><span>$${(priceNum * qty).toFixed(0)}</span></div>`;
+            }).join('');
+            checkoutTotal.textContent = 'Subtotal: $' + total.toFixed(0);
+            if (orderItemsField) {
+                orderItemsField.value = cart
+                    .map(item => `${item.name} (${item.size}) x${Math.max(1, parseInt(item.qty, 10) || 1)} - $${(parsePrice(item.price) * Math.max(1, parseInt(item.qty, 10) || 1)).toFixed(0)}`)
+                    .join('\n');
+            }
+            if (orderSubtotalField) {
+                orderSubtotalField.value = '$' + total.toFixed(0);
+            }
+        }
+
+        const paymentOptionCash = document.getElementById('paymentOptionCash');
+        const paymentOptionVisa = document.getElementById('paymentOptionVisa');
+        const visaForm = document.getElementById('visaForm');
+        const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+        const cardNumber = document.getElementById('cardNumber');
+        const cardExpiry = document.getElementById('cardExpiry');
+        const cardCvv = document.getElementById('cardCvv');
+        const cardName = document.getElementById('cardName');
+
+        function setPaymentUI(method) {
+            const isVisa = method === 'visa';
+            visaForm.classList.toggle('is-visible', isVisa);
+            paymentOptionCash.classList.toggle('selected', !isVisa);
+            paymentOptionVisa.classList.toggle('selected', isVisa);
+            [cardNumber, cardExpiry, cardCvv, cardName].forEach(el => {
+                if (el) el.required = isVisa;
+            });
+        }
+
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', () => setPaymentUI(radio.value));
+        });
+        paymentOptionCash.addEventListener('click', () => setPaymentUI('cash'));
+        paymentOptionVisa.addEventListener('click', () => setPaymentUI('visa'));
+        paymentOptionCash.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPaymentUI('cash'); paymentRadios[0].checked = true; } });
+        paymentOptionVisa.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPaymentUI('visa'); paymentRadios[1].checked = true; } });
+
+        cardNumber.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 16) v = v.slice(0, 16);
+            e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+        });
+        cardExpiry.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2, 4);
+            e.target.value = v;
+        });
+        cardCvv.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+        });
+
+        function validateVisa() {
+            const num = (cardNumber && cardNumber.value.replace(/\s/g, '')) || '';
+            const exp = (cardExpiry && cardExpiry.value) || '';
+            const cvv = (cardCvv && cardCvv.value) || '';
+            const name = (cardName && cardName.value.trim()) || '';
+            if (num.length < 15) return 'Please enter a valid card number.';
+            if (!/^\d{2}\/\d{2}$/.test(exp)) return 'Enter expiry as MM/YY.';
+            const [mm, yy] = exp.split('/').map(Number);
+            if (mm < 1 || mm > 12 || yy < 0 || yy > 99) return 'Enter a valid expiry date.';
+            if (cvv.length < 3) return 'Enter a valid CVV (3 or 4 digits).';
+            if (!name) return 'Enter the name on card.';
+            return null;
+        }
+
+        function encodeFormData(data) {
+            return new URLSearchParams(data).toString();
+        }
+
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const method = (document.querySelector('input[name="paymentMethod"]:checked') || {}).value;
+                if (method === 'visa') {
+                    const err = validateVisa();
+                    if (err) {
+                        alert(err);
+                        return;
+                    }
+                }
+
+                try {
+                    const formData = new FormData(checkoutForm);
+                    formData.set('orderId', 'ORD-' + Date.now());
+                    if (orderItemsField && orderItemsField.value) formData.set('orderItems', orderItemsField.value);
+                    if (orderSubtotalField && orderSubtotalField.value) formData.set('orderSubtotal', orderSubtotalField.value);
+                    // Do not store full payment card details in Netlify form submissions.
+                    formData.delete('cardNumber');
+                    formData.delete('cardExpiry');
+                    formData.delete('cardCvv');
+                    formData.delete('cardName');
+                    await fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: encodeFormData(formData)
+                    });
+
+                    if (method === 'visa') {
+                        alert('Thank you! Your order has been received. Payment will be processed securely.');
+                    } else {
+                        alert('Thank you! Your order has been received. Pay with cash on delivery.');
+                    }
+                    localStorage.setItem(CART_KEY, '[]');
+                    window.location.href = 'index.html';
+                } catch (error) {
+                    alert('There was an issue sending your order. Please try again.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

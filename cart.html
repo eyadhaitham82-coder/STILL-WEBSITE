@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Your cart - STILL. Review your items and proceed to checkout.">
+    <meta property="og:url" content="https://your-domain.com/cart.html">
+    <link rel="canonical" href="https://your-domain.com/cart.html">
+    <title>Your Cart - STILL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <style>
+        .cart-page { padding: 8rem 0 4rem; min-height: 60vh; }
+        .cart-page .container { max-width: 800px; }
+        .cart-page h1 { font-size: 2rem; margin-bottom: 2rem; color: var(--primary-color); }
+        .cart-page-empty { text-align: center; padding: 3rem; color: #666; }
+        .cart-page-empty a { color: var(--accent-color); text-decoration: none; font-weight: 500; }
+        .cart-page-empty a:hover { text-decoration: underline; }
+        .cart-page-list { margin-bottom: 2rem; }
+        .cart-page-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .cart-page-item-thumb {
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--light-gray);
+        }
+        .cart-page-item-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cart-page-item-info { flex: 1; min-width: 0; }
+        .cart-page-item-info strong { display: block; margin-bottom: 0.25rem; }
+        .cart-page-item-info span { color: #666; font-size: 0.95rem; }
+        .cart-page-item-right { display: flex; align-items: center; gap: 1.5rem; }
+        .cart-page-qty {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--medium-gray);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .cart-page-qty button {
+            border: none;
+            background: var(--secondary-color);
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .cart-page-qty button:hover { background: var(--light-gray); }
+        .cart-page-qty-value {
+            min-width: 34px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .cart-page-item-price { font-weight: 600; color: var(--accent-color); }
+        .cart-page-remove {
+            background: none; border: none; color: #999; font-size: 1.25rem;
+            cursor: pointer; padding: 0 4px; line-height: 1;
+        }
+        .cart-page-remove:hover { color: var(--primary-color); }
+        .cart-page-summary {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .cart-page-total { display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 600; }
+        .cart-page-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+        .cart-page-actions a {
+            display: block; text-align: center; padding: 1rem 1.5rem;
+            text-decoration: none; font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
+            font-size: 1rem; font-weight: 500; border-radius: 4px; transition: var(--transition);
+        }
+        .cart-page-checkout {
+            background: var(--accent-color); color: var(--secondary-color);
+        }
+        .cart-page-checkout:hover { background: #7a6549; color: var(--secondary-color); }
+        .cart-page-continue {
+            background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color);
+        }
+        .cart-page-continue:hover { background: var(--light-gray); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">STILL</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#collection" class="nav-link">Collection</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">🛒 <span class="cart-count" id="cartCount">0</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1>Your Cart</h1>
+            <div id="cartPageContent">
+                <div class="cart-page-empty" id="cartEmpty">
+                    <p>Your cart is empty.</p>
+                    <p><a href="index.html#collection">Continue shopping</a></p>
+                </div>
+                <div class="cart-page-list" id="cartList" style="display: none;"></div>
+                <div id="cartSummary" style="display: none;">
+                    <div class="cart-page-summary">
+                        <div class="cart-page-total">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal">$0</span>
+                        </div>
+                    </div>
+                    <div class="cart-page-actions">
+                        <a href="checkout.html" class="cart-page-checkout">Proceed to Checkout</a>
+                        <a href="index.html#collection" class="cart-page-continue">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const CART_KEY = 'still-cart';
+        let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+        function normalizeCart() {
+            cart = cart.map(item => ({
+                ...item,
+                qty: Math.max(1, parseInt(item.qty, 10) || 1)
+            }));
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        }
+
+        function getCartUnitsCount() {
+            return cart.reduce((sum, item) => sum + (parseInt(item.qty, 10) || 1), 0);
+        }
+
+        function parsePrice(str) {
+            const num = str.replace(/[^0-9.]/g, '');
+            return parseFloat(num) || 0;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            renderCart();
+        }
+
+        function changeQty(index, delta) {
+            const current = cart[index];
+            if (!current) return;
+            current.qty = Math.max(1, (parseInt(current.qty, 10) || 1) + delta);
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartList = document.getElementById('cartList');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+
+            if (cartCount) cartCount.textContent = getCartUnitsCount();
+
+            if (cart.length === 0) {
+                if (cartEmpty) cartEmpty.style.display = 'block';
+                if (cartList) cartList.style.display = 'none';
+                if (cartSummary) cartSummary.style.display = 'none';
+                return;
+            }
+
+            if (cartEmpty) cartEmpty.style.display = 'none';
+            if (cartList) cartList.style.display = 'block';
+            if (cartSummary) cartSummary.style.display = 'block';
+
+            let total = 0;
+            cartList.innerHTML = cart.map((item, i) => {
+                const priceNum = parsePrice(item.price);
+                const qty = Math.max(1, parseInt(item.qty, 10) || 1);
+                total += priceNum * qty;
+                const thumb = item.imageSrc
+                    ? `<div class="cart-page-item-thumb"><img src="${escapeHtml(item.imageSrc)}" alt=""></div>`
+                    : item.imageStyle
+                        ? `<div class="cart-page-item-thumb" style="background: ${escapeHtml(item.imageStyle)}"></div>`
+                        : '<div class="cart-page-item-thumb" style="background: var(--medium-gray)"></div>';
+                return `
+                    <div class="cart-page-item">
+                        ${thumb}
+                        <div class="cart-page-item-info">
+                            <strong>${escapeHtml(item.name)}</strong>
+                            <span>Size: ${escapeHtml(item.size)}</span>
+                        </div>
+                        <div class="cart-page-item-right">
+                            <div class="cart-page-qty">
+                                <button type="button" class="cart-page-qty-btn" data-index="${i}" data-delta="-1" aria-label="Decrease quantity">-</button>
+                                <span class="cart-page-qty-value">${qty}</span>
+                                <button type="button" class="cart-page-qty-btn" data-index="${i}" data-delta="1" aria-label="Increase quantity">+</button>
+                            </div>
+                            <span class="cart-page-item-price">$${(priceNum * qty).toFixed(0)}</span>
+                            <button type="button" class="cart-page-remove" data-index="${i}" aria-label="Remove">×</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            cartSubtotal.textContent = '$' + total.toFixed(0);
+
+            cartList.querySelectorAll('.cart-page-remove').forEach(btn => {
+                btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.index, 10)));
+            });
+            cartList.querySelectorAll('.cart-page-qty-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.index, 10), parseInt(btn.dataset.delta, 10)));
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        normalizeCart();
+        renderCart();
+    </script>
+</body>
+</html>

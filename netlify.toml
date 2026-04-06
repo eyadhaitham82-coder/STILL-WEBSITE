@@ -1,0 +1,4 @@
+# Static site — publish from repo root (index.html, cart.html, checkout.html, …)
+[build]
+  command = "true"
+  publish = "."

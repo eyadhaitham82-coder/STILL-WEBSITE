@@ -40,7 +40,19 @@
         <div class="category-page-body">
             <h2 class="section-title">Shop Tops</h2>
             <div class="collection-grid" data-category="tops">
-                <p class="category-page-empty">New pieces coming soon. Check back shortly.</p>
+                <div class="collection-item" data-sizes="M/L,L/XL">
+                    <div class="collection-image">
+                        <img src="images/products/striped-crochet-halter-top.png" alt="Striped Crochet Halter Top">
+                        <div class="collection-overlay">
+                            <button type="button" class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Striped Crochet Halter Top</h3>
+                        <p class="price">1,450 EGP</p>
+                        <p class="collection-sizes-hint">Sizes: M/L · L/XL</p>
+                    </div>
+                </div>
             </div>
             <a href="index.html" class="category-page-back">← All categories</a>
             <nav class="category-page-nav-links" aria-label="Other categories">
@@ -49,6 +61,33 @@
             </nav>
         </div>
     </main>
+
+    <div class="quick-view-modal" id="quickViewModal" aria-hidden="true">
+        <div class="quick-view-overlay"></div>
+        <div class="quick-view-content">
+            <button type="button" class="quick-view-close" aria-label="Close">&times;</button>
+            <div class="quick-view-body">
+                <div class="quick-view-image" id="modalProductImage"></div>
+                <div class="quick-view-details">
+                    <h3 class="quick-view-title" id="modalProductName"></h3>
+                    <p class="quick-view-price" id="modalProductPrice"></p>
+                    <div class="quick-view-sizes">
+                        <span class="quick-view-label">Size:</span>
+                        <div class="size-options" id="modalSizeOptions"></div>
+                    </div>
+                    <div class="quick-view-quantity" id="quickViewQuantity" style="display: none;">
+                        <span class="quick-view-label">Quantity:</span>
+                        <div class="quick-qty-controls">
+                            <button type="button" class="quick-qty-btn" id="quickQtyDec" aria-label="Decrease quantity">-</button>
+                            <span class="quick-qty-value" id="quickQtyValue">1</span>
+                            <button type="button" class="quick-qty-btn" id="quickQtyInc" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                    <button type="button" class="quick-view-add">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -55,7 +55,19 @@
                 <a href="tops.html" class="shop-all-section-link">View category</a>
             </div>
             <div class="collection-grid" data-category="tops">
-                <p class="category-page-empty">New tops coming soon.</p>
+                <div class="collection-item" data-sizes="M/L,L/XL">
+                    <div class="collection-image">
+                        <img src="images/products/striped-crochet-halter-top.png" alt="Striped Crochet Halter Top">
+                        <div class="collection-overlay">
+                            <button type="button" class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Striped Crochet Halter Top</h3>
+                        <p class="price">1,450 EGP</p>
+                        <p class="collection-sizes-hint">Sizes: M/L · L/XL</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -93,11 +105,7 @@
                     <p class="quick-view-price" id="modalProductPrice"></p>
                     <div class="quick-view-sizes">
                         <span class="quick-view-label">Size:</span>
-                        <div class="size-options">
-                            <button type="button" class="size-btn" data-size="Small">Small</button>
-                            <button type="button" class="size-btn" data-size="Medium">Medium</button>
-                            <button type="button" class="size-btn" data-size="Large">Large</button>
-                        </div>
+                        <div class="size-options" id="modalSizeOptions"></div>
                     </div>
                     <div class="quick-view-quantity" id="quickViewQuantity" style="display: none;">
                         <span class="quick-view-label">Quantity:</span>

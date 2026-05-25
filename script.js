@@ -1,3 +1,9 @@
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -195,12 +201,28 @@ const modalProductName = document.getElementById('modalProductName');
 const modalProductPrice = document.getElementById('modalProductPrice');
 const quickViewOverlay = document.querySelector('.quick-view-overlay');
 const quickViewClose = document.querySelector('.quick-view-close');
-const sizeButtons = document.querySelectorAll('.size-btn');
+const modalSizeOptions = document.getElementById('modalSizeOptions');
 const quickViewQuantity = document.getElementById('quickViewQuantity');
 const quickQtyDec = document.getElementById('quickQtyDec');
 const quickQtyInc = document.getElementById('quickQtyInc');
 const quickQtyValue = document.getElementById('quickQtyValue');
 let selectedQty = 1;
+
+function getProductSizes(item) {
+    const raw = item && item.dataset.sizes;
+    if (raw) {
+        return raw.split(',').map(s => s.trim()).filter(Boolean);
+    }
+    return ['Small', 'Medium', 'Large'];
+}
+
+function renderModalSizeOptions(sizes) {
+    if (!modalSizeOptions) return;
+    modalSizeOptions.innerHTML = sizes.map(size => {
+        const safe = escapeHtml(size);
+        return `<button type="button" class="size-btn" data-size="${safe}">${safe}</button>`;
+    }).join('');
+}
 
 function openQuickView(button) {
     if (!quickViewModal) return;
@@ -223,7 +245,10 @@ function openQuickView(button) {
         modalProductImage.appendChild(clone);
     }
 
-    sizeButtons.forEach(btn => btn.classList.remove('selected'));
+    renderModalSizeOptions(getProductSizes(item));
+    if (modalSizeOptions) {
+        modalSizeOptions.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+    }
     selectedQty = 1;
     if (quickQtyValue) quickQtyValue.textContent = String(selectedQty);
     if (quickViewQuantity) quickViewQuantity.style.display = 'none';
@@ -249,13 +274,15 @@ collectionItems.forEach(item => {
 if (quickViewOverlay) quickViewOverlay.addEventListener('click', closeQuickView);
 if (quickViewClose) quickViewClose.addEventListener('click', closeQuickView);
 
-sizeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        sizeButtons.forEach(b => b.classList.remove('selected'));
+if (modalSizeOptions) {
+    modalSizeOptions.addEventListener('click', (e) => {
+        const btn = e.target.closest('.size-btn');
+        if (!btn) return;
+        modalSizeOptions.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         if (quickViewQuantity) quickViewQuantity.style.display = 'flex';
     });
-});
+}
 
 if (quickQtyDec) {
     quickQtyDec.addEventListener('click', () => {
@@ -272,7 +299,7 @@ if (quickQtyInc) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && quickViewModal.classList.contains('is-open')) {
+    if (e.key === 'Escape' && quickViewModal && quickViewModal.classList.contains('is-open')) {
         closeQuickView();
     }
 });
@@ -356,12 +383,6 @@ function updateCartUI() {
     document.querySelectorAll('.cart-item-remove').forEach(btn => {
         btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.index, 10)));
     });
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
 }
 
 function showToast(message) {

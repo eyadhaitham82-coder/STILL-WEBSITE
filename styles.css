@@ -746,6 +746,19 @@ body {
     transform: translateY(-10px);
 }
 
+.collection-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.collection-sizes-hint {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.35rem;
+}
+
 .collection-image {
     position: relative;
     overflow: hidden;

@@ -345,7 +345,195 @@ body {
     transition: var(--transition);
 }
 
-/* Hero Section */
+/* Category landing (home) */
+.category-landing {
+    padding-top: 72px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.category-block {
+    position: relative;
+    width: 100%;
+    min-height: 38vh;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #e8e4df;
+}
+
+.category-block--bottoms {
+    background: linear-gradient(160deg, #8b9da8 0%, #5c6b75 100%);
+}
+
+.category-block--tops {
+    background: linear-gradient(160deg, #c4b5a0 0%, #8b7355 100%);
+}
+
+.category-block--sets {
+    background: linear-gradient(160deg, #6b7b8a 0%, #3d4a56 100%);
+}
+
+.category-block-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.category-block-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: 1;
+}
+
+.category-block-title {
+    font-family: 'Fredoka', 'PP Neue Montreal', sans-serif;
+    font-size: clamp(2.25rem, 10vw, 3.25rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+
+.category-shop-btn {
+    display: inline-block;
+    padding: 0.45rem 1.75rem;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-shop-btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .category-landing {
+        max-width: 520px;
+    }
+
+    .category-block {
+        min-height: 42vh;
+    }
+}
+
+/* Category shop pages */
+.category-page {
+    padding-top: 72px;
+    min-height: 100vh;
+}
+
+.category-page-hero {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #e8e4df;
+}
+
+.category-page-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.category-page-hero-title {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Fredoka', 'PP Neue Montreal', sans-serif;
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.category-page-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 20px 4rem;
+}
+
+.category-page-body .section-title {
+    margin-bottom: 2rem;
+}
+
+.category-page-empty {
+    text-align: center;
+    color: #666;
+    padding: 2rem 1rem;
+    font-size: 1.05rem;
+}
+
+.category-page-back {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.category-page-back:hover {
+    text-decoration: underline;
+}
+
+.category-page-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.category-page-nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.category-page-nav-links a:hover {
+    color: var(--accent-color);
+}
+
+@media (min-width: 768px) {
+    .category-page-hero {
+        max-width: 520px;
+    }
+}
+
+/* Hero Section (legacy – kept for other pages if needed) */
 .hero {
     height: 100vh;
     background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%);

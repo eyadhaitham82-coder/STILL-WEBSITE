@@ -1,8 +1,3 @@
-// Shop Now button – scroll to collection
-document.querySelector('.hero .cta-button')?.addEventListener('click', () => {
-    document.querySelector('#collection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');

@@ -18,6 +18,7 @@
     <title>STILL | Fashion Collection – Shop Elegant Clothing &amp; Accessories</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -58,17 +59,29 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="hero-title">Elevate Your Style</h1>
-            <p class="hero-subtitle">Discover the New Collection 2026</p>
-            <button class="cta-button">Shop Now</button>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
+    <!-- Category landing: first screen visitors see -->
+    <section class="category-landing" id="home" aria-label="Shop by category">
+        <article class="category-block category-block--bottoms">
+            <img src="images/categories/bottoms.png" alt="STILL bottoms collection" class="category-block-img" width="800" height="1000">
+            <div class="category-block-overlay">
+                <h2 class="category-block-title">BOTTOMS</h2>
+                <a href="bottoms.html" class="category-shop-btn">SHOP</a>
+            </div>
+        </article>
+        <article class="category-block category-block--tops">
+            <img src="images/categories/tops.png" alt="STILL tops collection" class="category-block-img" width="800" height="1000">
+            <div class="category-block-overlay">
+                <h2 class="category-block-title">TOPS</h2>
+                <a href="tops.html" class="category-shop-btn">SHOP</a>
+            </div>
+        </article>
+        <article class="category-block category-block--sets">
+            <img src="images/categories/sets.png" alt="STILL sets collection" class="category-block-img" width="800" height="1000">
+            <div class="category-block-overlay">
+                <h2 class="category-block-title">SETS</h2>
+                <a href="sets.html" class="category-shop-btn">SHOP</a>
+            </div>
+        </article>
     </section>
 
     <!-- Featured Collection -->
@@ -199,10 +212,10 @@
                 <div class="footer-col">
                     <h4>Shop</h4>
                     <ul>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Best Sellers</a></li>
-                        <li><a href="#">Collections</a></li>
-                        <li><a href="#">Gift Cards</a></li>
+                        <li><a href="bottoms.html">Bottoms</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="sets.html">Sets</a></li>
+                        <li><a href="index.html#collection">All Collection</a></li>
                     </ul>
                 </div>
                 

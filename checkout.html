@@ -188,6 +188,9 @@
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/emailjs-config.js"></script>
+    <script src="js/checkout-email.js"></script>
     <script>
         const CART_KEY = 'still-cart';
         let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
@@ -314,9 +317,16 @@
                     }
                 }
 
+                const submitBtn = checkoutForm.querySelector('.checkout-submit');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Placing order…';
+                }
+
                 try {
+                    const orderId = 'ORD-' + Date.now();
                     const formData = new FormData(checkoutForm);
-                    formData.set('orderId', 'ORD-' + Date.now());
+                    formData.set('orderId', orderId);
                     if (orderItemsField && orderItemsField.value) formData.set('orderItems', orderItemsField.value);
                     if (orderSubtotalField && orderSubtotalField.value) formData.set('orderSubtotal', orderSubtotalField.value);
                     // Do not store full payment card details in Netlify form submissions.
@@ -330,15 +340,44 @@
                         body: encodeFormData(formData)
                     });
 
-                    if (method === 'visa') {
-                        alert('Thank you! Your order has been received. Payment will be processed securely.');
-                    } else {
-                        alert('Thank you! Your order has been received. Pay with cash on delivery.');
+                    const firstName = (document.getElementById('firstName') || {}).value || '';
+                    const lastName = (document.getElementById('lastName') || {}).value || '';
+                    const email = (document.getElementById('email') || {}).value || '';
+                    let emailSent = false;
+                    if (typeof sendStillOrderEmails === 'function') {
+                        const emailResult = await sendStillOrderEmails({
+                            email,
+                            customerName: `${firstName} ${lastName}`.trim(),
+                            orderId,
+                            orderItems: orderItemsField ? orderItemsField.value : '',
+                            orderSubtotal: orderSubtotalField ? orderSubtotalField.value : '',
+                            phone: (document.getElementById('phone') || {}).value || '',
+                            address: (document.getElementById('address') || {}).value || '',
+                            city: (document.getElementById('city') || {}).value || '',
+                            paymentMethod: method === 'visa' ? 'Visa / Card' : 'Cash on delivery',
+                            notes: (document.getElementById('notes') || {}).value || ''
+                        });
+                        emailSent = emailResult && emailResult.customer;
                     }
+
+                    let thankYou = method === 'visa'
+                        ? 'Thank you! Your order has been received. Payment will be processed securely.'
+                        : 'Thank you! Your order has been received. Pay with cash on delivery.';
+                    if (emailSent) {
+                        thankYou += ' A confirmation email was sent to ' + email + '.';
+                    } else if (email) {
+                        thankYou += ' (We could not send the confirmation email — we will still process your order.)';
+                    }
+                    alert(thankYou);
                     localStorage.setItem(CART_KEY, '[]');
                     window.location.href = 'index.html';
                 } catch (error) {
                     alert('There was an issue sending your order. Please try again.');
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Place order';
+                    }
                 }
             });
         }

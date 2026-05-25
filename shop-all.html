@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Shop all STILL — bottoms, tops, and sets in one place.">
+    <title>Shop All – STILL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">STILL</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop-all.html" class="nav-link active">Shop All</a></li>
+                <li><a href="bottoms.html" class="nav-link">Bottoms</a></li>
+                <li><a href="tops.html" class="nav-link">Tops</a></li>
+                <li><a href="sets.html" class="nav-link">Sets</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" type="button" aria-label="Search">🔍</button>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">🛒 <span class="cart-count" id="cartCount">0</span></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="shop-all-page" id="shop-all">
+        <header class="shop-all-header">
+            <h1 class="shop-all-title">Shop All</h1>
+            <p class="shop-all-subtitle">Everything in bottoms, tops &amp; sets</p>
+        </header>
+
+        <section class="shop-all-section" id="section-bottoms">
+            <div class="shop-all-section-head">
+                <h2 class="shop-all-section-title">Bottoms</h2>
+                <a href="bottoms.html" class="shop-all-section-link">View category</a>
+            </div>
+            <div class="collection-grid" data-category="bottoms">
+                <p class="category-page-empty">New bottoms coming soon.</p>
+            </div>
+        </section>
+
+        <section class="shop-all-section" id="section-tops">
+            <div class="shop-all-section-head">
+                <h2 class="shop-all-section-title">Tops</h2>
+                <a href="tops.html" class="shop-all-section-link">View category</a>
+            </div>
+            <div class="collection-grid" data-category="tops">
+                <p class="category-page-empty">New tops coming soon.</p>
+            </div>
+        </section>
+
+        <section class="shop-all-section" id="section-sets">
+            <div class="shop-all-section-head">
+                <h2 class="shop-all-section-title">Sets</h2>
+                <a href="sets.html" class="shop-all-section-link">View category</a>
+            </div>
+            <div class="collection-grid" data-category="sets">
+                <p class="category-page-empty">New sets coming soon.</p>
+            </div>
+        </section>
+
+        <a href="index.html" class="category-page-back">← Back to home</a>
+    </main>
+
+    <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+        <div class="search-overlay-backdrop"></div>
+        <div class="search-overlay-content">
+            <button type="button" class="search-close" id="searchClose" aria-label="Close search">&times;</button>
+            <input type="search" class="search-input" id="searchInput" placeholder="Search collection..." autocomplete="off">
+            <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
+            <p class="search-no-results" id="searchNoResults" style="display: none;">No items match your search.</p>
+        </div>
+    </div>
+
+    <div class="quick-view-modal" id="quickViewModal" aria-hidden="true">
+        <div class="quick-view-overlay"></div>
+        <div class="quick-view-content">
+            <button class="quick-view-close" aria-label="Close">&times;</button>
+            <div class="quick-view-body">
+                <div class="quick-view-image" id="modalProductImage"></div>
+                <div class="quick-view-details">
+                    <h3 class="quick-view-title" id="modalProductName"></h3>
+                    <p class="quick-view-price" id="modalProductPrice"></p>
+                    <div class="quick-view-sizes">
+                        <span class="quick-view-label">Size:</span>
+                        <div class="size-options">
+                            <button type="button" class="size-btn" data-size="Small">Small</button>
+                            <button type="button" class="size-btn" data-size="Medium">Medium</button>
+                            <button type="button" class="size-btn" data-size="Large">Large</button>
+                        </div>
+                    </div>
+                    <div class="quick-view-quantity" id="quickViewQuantity" style="display: none;">
+                        <span class="quick-view-label">Quantity:</span>
+                        <div class="quick-qty-controls">
+                            <button type="button" class="quick-qty-btn" id="quickQtyDec" aria-label="Decrease quantity">-</button>
+                            <span class="quick-qty-value" id="quickQtyValue">1</span>
+                            <button type="button" class="quick-qty-btn" id="quickQtyInc" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                    <button type="button" class="quick-view-add">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

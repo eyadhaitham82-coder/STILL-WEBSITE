@@ -77,7 +77,8 @@ function openSearch() {
     }
     runSearch('');
     updateSearchSuggestions('');
-    document.getElementById('collection') && document.getElementById('collection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const shopAll = document.getElementById('shop-all');
+    if (shopAll) shopAll.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function closeSearch() {
@@ -202,6 +203,7 @@ const quickQtyValue = document.getElementById('quickQtyValue');
 let selectedQty = 1;
 
 function openQuickView(button) {
+    if (!quickViewModal) return;
     const item = button.closest('.collection-item');
     const name = item.querySelector('h3').textContent;
     const price = item.querySelector('.price').textContent;
@@ -231,6 +233,7 @@ function openQuickView(button) {
 }
 
 function closeQuickView() {
+    if (!quickViewModal) return;
     quickViewModal.classList.remove('is-open');
     quickViewModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';

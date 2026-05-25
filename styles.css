@@ -428,6 +428,100 @@ body {
     color: #fff;
 }
 
+.shop-all-cta {
+    width: 100%;
+    padding: 1.75rem 1.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+}
+
+.shop-all-btn {
+    display: inline-block;
+    padding: 0.65rem 2.5rem;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.shop-all-btn:hover {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* Shop All page */
+.shop-all-page {
+    padding: 6.5rem 20px 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.shop-all-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.shop-all-title {
+    font-family: 'Fredoka', 'PP Neue Montreal', sans-serif;
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+}
+
+.shop-all-subtitle {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.shop-all-section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.shop-all-section:last-of-type {
+    border-bottom: none;
+}
+
+.shop-all-section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.shop-all-section-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: 0.02em;
+}
+
+.shop-all-section-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.shop-all-section-link:hover {
+    text-decoration: underline;
+}
+
+.shop-all-page .collection-grid .category-page-empty {
+    grid-column: 1 / -1;
+}
+
 @media (min-width: 768px) {
     .category-landing {
         max-width: 520px;

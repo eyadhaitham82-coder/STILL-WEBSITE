@@ -27,12 +27,11 @@
             <a href="index.html" class="logo">STILL</a>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#collection" class="nav-link">Collection</a></li>
+                <li><a href="shop-all.html" class="nav-link">Shop All</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="icon-btn" id="searchBtn" type="button" aria-label="Search">🔍</button>
                 <button class="icon-btn cart-btn" id="cartBtn" aria-label="Cart">
                     🛒
                     <span class="cart-count" id="cartCount">0</span>
@@ -82,76 +81,8 @@
                 <a href="sets.html" class="category-shop-btn">SHOP</a>
             </div>
         </article>
-    </section>
-
-    <!-- Featured Collection -->
-    <section class="featured-collection" id="collection">
-        <div class="container">
-            <h2 class="section-title">Featured Collection</h2>
-            
-            <div class="collection-grid">
-                <!-- Summer Elegance -->
-                <div class="collection-item">
-                    <div class="collection-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <span class="image-text">Summer Elegance</span>
-                        </div>
-                        <div class="collection-overlay">
-                            <button class="quick-view">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="collection-info">
-                        <h3>Summer Elegance</h3>
-                        <p class="price">$299</p>
-                    </div>
-                </div>
-
-                <!-- Urban Chic - This will use the polo shirt image -->
-                <div class="collection-item">
-                    <div class="collection-image">
-                        <img src="urban-chic.jpg" alt="Urban Chic" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
-                        <div class="collection-overlay">
-                            <button class="quick-view">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="collection-info">
-                        <h3>Urban Chic</h3>
-                        <p class="price">$349</p>
-                    </div>
-                </div>
-
-                <!-- Minimalist -->
-                <div class="collection-item">
-                    <div class="collection-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #30cfd0 0%, #4facfe 100%);">
-                            <span class="image-text">Minimalist</span>
-                        </div>
-                        <div class="collection-overlay">
-                            <button class="quick-view">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="collection-info">
-                        <h3>Minimalist</h3>
-                        <p class="price">$279</p>
-                    </div>
-                </div>
-
-                <!-- Evening Glow -->
-                <div class="collection-item">
-                    <div class="collection-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                            <span class="image-text">Evening Glow</span>
-                        </div>
-                        <div class="collection-overlay">
-                            <button class="quick-view">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="collection-info">
-                        <h3>Evening Glow</h3>
-                        <p class="price">$399</p>
-                    </div>
-                </div>
-            </div>
+        <div class="shop-all-cta">
+            <a href="shop-all.html" class="shop-all-btn">SHOP ALL</a>
         </div>
     </section>
 
@@ -215,7 +146,7 @@
                         <li><a href="bottoms.html">Bottoms</a></li>
                         <li><a href="tops.html">Tops</a></li>
                         <li><a href="sets.html">Sets</a></li>
-                        <li><a href="index.html#collection">All Collection</a></li>
+                        <li><a href="shop-all.html">Shop All</a></li>
                     </ul>
                 </div>
                 
@@ -245,49 +176,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="searchOverlay" aria-hidden="true">
-        <div class="search-overlay-backdrop"></div>
-        <div class="search-overlay-content">
-            <button type="button" class="search-close" id="searchClose" aria-label="Close search">&times;</button>
-            <input type="search" class="search-input" id="searchInput" placeholder="Search collection..." autocomplete="off">
-            <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
-            <p class="search-no-results" id="searchNoResults" style="display: none;">No items match your search.</p>
-        </div>
-    </div>
-
-    <!-- Quick View Modal -->
-    <div class="quick-view-modal" id="quickViewModal" aria-hidden="true">
-        <div class="quick-view-overlay"></div>
-        <div class="quick-view-content">
-            <button class="quick-view-close" aria-label="Close">&times;</button>
-            <div class="quick-view-body">
-                <div class="quick-view-image" id="modalProductImage"></div>
-                <div class="quick-view-details">
-                    <h3 class="quick-view-title" id="modalProductName"></h3>
-                    <p class="quick-view-price" id="modalProductPrice"></p>
-                    <div class="quick-view-sizes">
-                        <span class="quick-view-label">Size:</span>
-                        <div class="size-options">
-                            <button type="button" class="size-btn" data-size="Small">Small</button>
-                            <button type="button" class="size-btn" data-size="Medium">Medium</button>
-                            <button type="button" class="size-btn" data-size="Large">Large</button>
-                        </div>
-                    </div>
-                    <div class="quick-view-quantity" id="quickViewQuantity" style="display: none;">
-                        <span class="quick-view-label">Quantity:</span>
-                        <div class="quick-qty-controls">
-                            <button type="button" class="quick-qty-btn" id="quickQtyDec" aria-label="Decrease quantity">-</button>
-                            <span class="quick-qty-value" id="quickQtyValue">1</span>
-                            <button type="button" class="quick-qty-btn" id="quickQtyInc" aria-label="Increase quantity">+</button>
-                        </div>
-                    </div>
-                    <button type="button" class="quick-view-add">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>

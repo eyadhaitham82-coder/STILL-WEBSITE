@@ -9,7 +9,6 @@
     <link rel="canonical" href="https://your-domain.com/checkout.html">
     <title>Checkout - STILL</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
     <style>
         .checkout-page { padding: 8rem 0 4rem; min-height: 60vh; }
         .checkout-page .container { max-width: 600px; }
@@ -18,7 +17,7 @@
         .checkout-form input, .checkout-form textarea {
             width: 100%; padding: 0.75rem 1rem; margin-bottom: 1rem;
             border: 1px solid var(--medium-gray); border-radius: 4px;
-            font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif; font-size: 1rem;
+            font-family: var(--font-body); font-size: 1rem;
         }
         .checkout-form input:focus, .checkout-form textarea:focus {
             outline: 2px solid var(--accent-color); border-color: var(--accent-color);
@@ -34,7 +33,7 @@
             border: none; font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
             font-size: 1rem; font-weight: 500; cursor: pointer; border-radius: 4px; transition: var(--transition);
         }
-        .checkout-submit:hover { background: #7a6549; }
+        .checkout-submit:hover { background: var(--accent-hover); }
         .checkout-back { display: inline-block; margin-bottom: 1.5rem; color: var(--accent-color); text-decoration: none; font-size: 0.95rem; }
         .checkout-back:hover { text-decoration: underline; }
         .payment-methods { margin-bottom: 1.5rem; }

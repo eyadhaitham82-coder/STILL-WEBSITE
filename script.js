@@ -370,7 +370,7 @@ function updateCartUI() {
                 ${thumb}
                 <div class="cart-item-info">
                     <strong>${escapeHtml(item.name)}</strong>
-                    <span>${escapeHtml(item.size)} · Qty: ${item.qty || 1} · ${escapeHtml(item.price)}</span>
+                    <span>${escapeHtml(item.size)} · Qty: ${item.qty || 1} · ${escapeHtml(typeof formatPrice === 'function' ? formatPrice(parsePrice(item.price)) : item.price)}</span>
                 </div>
                 <button type="button" class="cart-item-remove" data-index="${i}" aria-label="Remove">×</button>
             `;

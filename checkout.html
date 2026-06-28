@@ -100,7 +100,7 @@
                 <div class="checkout-order" id="checkoutOrder">
                     <h3>Order summary</h3>
                     <div id="checkoutItems"></div>
-                    <div class="checkout-order-total" id="checkoutTotal">Subtotal: $0</div>
+                    <div class="checkout-order-total" id="checkoutTotal">Subtotal: 0 EGP</div>
                 </div>
 
                 <form class="checkout-form" id="checkoutForm" name="checkout" method="POST" action="https://api.sheetmonkey.io/form/a9f4qe4rpHxXmCc3ycSqkV">
@@ -185,15 +185,11 @@
     <script src="js/sheetmonkey-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/emailjs-config.js"></script>
+    <script src="js/price-utils.js"></script>
     <script src="js/checkout-email.js"></script>
     <script>
         const CART_KEY = 'still-cart';
         let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
-
-        function parsePrice(str) {
-            const num = str.replace(/[^0-9.]/g, '');
-            return parseFloat(num) || 0;
-        }
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -228,16 +224,16 @@
                 const priceNum = parsePrice(item.price);
                 const qty = Math.max(1, parseInt(item.qty, 10) || 1);
                 total += priceNum * qty;
-                return `<div class="checkout-order-item"><span>${escapeHtml(item.name)} (${escapeHtml(item.size)}) x ${qty}</span><span>$${(priceNum * qty).toFixed(0)}</span></div>`;
+                return `<div class="checkout-order-item"><span>${escapeHtml(item.name)} (${escapeHtml(item.size)}) x ${qty}</span><span>${formatPrice(priceNum * qty)}</span></div>`;
             }).join('');
-            checkoutTotal.textContent = 'Subtotal: $' + total.toFixed(0);
+            checkoutTotal.textContent = 'Subtotal: ' + formatPrice(total);
             if (orderItemsField) {
                 orderItemsField.value = cart
-                    .map(item => `${item.name} (${item.size}) x${Math.max(1, parseInt(item.qty, 10) || 1)} - $${(parsePrice(item.price) * Math.max(1, parseInt(item.qty, 10) || 1)).toFixed(0)}`)
+                    .map(item => `${item.name} (${item.size}) x${Math.max(1, parseInt(item.qty, 10) || 1)} - ${formatPrice(parsePrice(item.price) * Math.max(1, parseInt(item.qty, 10) || 1))}`)
                     .join('\n');
             }
             if (orderSubtotalField) {
-                orderSubtotalField.value = '$' + total.toFixed(0);
+                orderSubtotalField.value = formatPrice(total);
             }
         }
 

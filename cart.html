@@ -121,7 +121,7 @@
                     <div class="cart-page-summary">
                         <div class="cart-page-total">
                             <span>Subtotal</span>
-                            <span id="cartSubtotal">$0</span>
+                            <span id="cartSubtotal">0 EGP</span>
                         </div>
                     </div>
                     <div class="cart-page-actions">
@@ -133,6 +133,7 @@
         </div>
     </main>
 
+    <script src="js/price-utils.js"></script>
     <script>
         const CART_KEY = 'still-cart';
         let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
@@ -147,11 +148,6 @@
 
         function getCartUnitsCount() {
             return cart.reduce((sum, item) => sum + (parseInt(item.qty, 10) || 1), 0);
-        }
-
-        function parsePrice(str) {
-            const num = str.replace(/[^0-9.]/g, '');
-            return parseFloat(num) || 0;
         }
 
         function removeItem(index) {
@@ -211,14 +207,14 @@
                                 <span class="cart-page-qty-value">${qty}</span>
                                 <button type="button" class="cart-page-qty-btn" data-index="${i}" data-delta="1" aria-label="Increase quantity">+</button>
                             </div>
-                            <span class="cart-page-item-price">$${(priceNum * qty).toFixed(0)}</span>
+                            <span class="cart-page-item-price">${formatPrice(priceNum * qty)}</span>
                             <button type="button" class="cart-page-remove" data-index="${i}" aria-label="Remove">×</button>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            cartSubtotal.textContent = '$' + total.toFixed(0);
+            cartSubtotal.textContent = formatPrice(total);
 
             cartList.querySelectorAll('.cart-page-remove').forEach(btn => {
                 btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.index, 10)));

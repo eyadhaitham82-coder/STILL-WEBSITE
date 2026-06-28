@@ -104,15 +104,11 @@
                     <div class="checkout-order-total" id="checkoutTotal">Subtotal: $0</div>
                 </div>
 
-                <form class="checkout-form" id="checkoutForm" name="checkout" method="POST" action="/thank-you" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="checkout">
+                <form class="checkout-form" id="checkoutForm" name="checkout" method="POST" action="https://api.sheetmonkey.io/form/a9f4qe4rpHxXmCc3ycSqkV">
                     <input type="hidden" name="siteSource" value="still-website-checkout">
                     <input type="hidden" id="orderId" name="orderId" value="">
                     <input type="hidden" id="orderItems" name="orderItems" value="">
                     <input type="hidden" id="orderSubtotal" name="orderSubtotal" value="">
-                    <p style="display: none;">
-                        <label>Don't fill this out: <input name="bot-field"></label>
-                    </p>
                     <h3 style="margin-bottom: 1rem;">Shipping details</h3>
                     <div class="form-row">
                         <div>
@@ -180,7 +176,6 @@
                             </div>
                         </div>
                     </div>
-                    <div data-netlify-recaptcha="true"></div>
 
                     <button type="submit" class="checkout-submit">Place order</button>
                 </form>
@@ -188,6 +183,7 @@
         </div>
     </main>
 
+    <script src="js/sheetmonkey-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/emailjs-config.js"></script>
     <script src="js/checkout-email.js"></script>
@@ -301,8 +297,10 @@
             return null;
         }
 
-        function encodeFormData(data) {
-            return new URLSearchParams(data).toString();
+        function getSheetMonkeyAction() {
+            const fromConfig = window.STILL_SHEET_MONKEY && window.STILL_SHEET_MONKEY.formAction;
+            if (fromConfig) return fromConfig;
+            return checkoutForm ? checkoutForm.getAttribute('action') : '';
         }
 
         if (checkoutForm) {
@@ -329,16 +327,22 @@
                     formData.set('orderId', orderId);
                     if (orderItemsField && orderItemsField.value) formData.set('orderItems', orderItemsField.value);
                     if (orderSubtotalField && orderSubtotalField.value) formData.set('orderSubtotal', orderSubtotalField.value);
-                    // Do not store full payment card details in Netlify form submissions.
+                    formData.set('paymentMethod', method === 'visa' ? 'Visa / Card' : 'Cash on delivery');
+                    // Never send card details to the sheet.
                     formData.delete('cardNumber');
                     formData.delete('cardExpiry');
                     formData.delete('cardCvv');
                     formData.delete('cardName');
-                    await fetch('/', {
+
+                    const sheetAction = getSheetMonkeyAction();
+                    const sheetResponse = await fetch(sheetAction, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: encodeFormData(formData)
+                        body: formData
                     });
+
+                    if (!sheetResponse.ok) {
+                        throw new Error('Sheet submission failed: ' + sheetResponse.status);
+                    }
 
                     const firstName = (document.getElementById('firstName') || {}).value || '';
                     const lastName = (document.getElementById('lastName') || {}).value || '';

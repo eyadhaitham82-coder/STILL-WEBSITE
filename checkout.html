@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Checkout - STILL. Complete your order with secure payment.">
+    <meta name="description" content="Checkout - SOMEWHERE. Complete your order with a smooth, secure flow.">
     <meta property="og:url" content="https://your-domain.com/checkout.html">
     <link rel="canonical" href="https://your-domain.com/checkout.html">
-    <title>Checkout - STILL</title>
+    <title>Checkout - SOMEWHERE</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .checkout-page { padding: 8rem 0 4rem; min-height: 60vh; }
@@ -30,7 +30,7 @@
         .checkout-order-total { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--medium-gray); font-weight: 600; font-size: 1.1rem; }
         .checkout-submit {
             width: 100%; padding: 1rem 1.5rem; background: var(--accent-color); color: var(--secondary-color);
-            border: none; font-family: 'PP Neue Montreal', 'Neue Montreal', sans-serif;
+            border: none; font-family: var(--font-body);
             font-size: 1rem; font-weight: 500; cursor: pointer; border-radius: 4px; transition: var(--transition);
         }
         .checkout-submit:hover { background: var(--accent-hover); }
@@ -51,7 +51,7 @@
             background: var(--secondary-color);
         }
         .payment-option:hover { border-color: var(--accent-color); background: var(--light-gray); }
-        .payment-option.selected { border-color: var(--accent-color); background: rgba(139, 115, 85, 0.08); }
+        .payment-option.selected { border-color: var(--accent-color); background: rgba(38, 21, 15, 0.08); }
         .payment-option input { margin: 0; width: 18px; height: 18px; accent-color: var(--accent-color); }
         .payment-option .payment-label { flex: 1; font-weight: 500; }
         .payment-option .payment-icon { font-size: 1.5rem; }
@@ -74,7 +74,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">STILL</a>
+            <a href="index.html" class="logo" aria-label="SOMEWHERE"><img src="images/brand/somewhere-logo.png" alt="SOMEWHERE"></a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="shop-all.html" class="nav-link">Shop All</a></li>
@@ -293,7 +293,7 @@
         }
 
         function getSheetMonkeyAction() {
-            const fromConfig = window.STILL_SHEET_MONKEY && window.STILL_SHEET_MONKEY.formAction;
+            const fromConfig = window.SOMEWHERE_SHEET_MONKEY && window.SOMEWHERE_SHEET_MONKEY.formAction;
             if (fromConfig) return fromConfig;
             return checkoutForm ? checkoutForm.getAttribute('action') : '';
         }
@@ -343,8 +343,8 @@
                     const lastName = (document.getElementById('lastName') || {}).value || '';
                     const email = (document.getElementById('email') || {}).value || '';
                     let emailSent = false;
-                    if (typeof sendStillOrderEmails === 'function') {
-                        const emailResult = await sendStillOrderEmails({
+                    if (typeof sendSomewhereOrderEmails === 'function') {
+                        const emailResult = await sendSomewhereOrderEmails({
                             email,
                             customerName: `${firstName} ${lastName}`.trim(),
                             orderId,

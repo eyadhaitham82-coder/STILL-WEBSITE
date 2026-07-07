@@ -2,14 +2,14 @@
  * Sends order confirmation via EmailJS after checkout.
  * Requires js/emailjs-config.js (copy from emailjs-config.example.js).
  */
-async function sendStillOrderEmails(order) {
+async function sendSomewhereOrderEmails(order) {
     const cfg = window.STILL_EMAILJS;
     if (!cfg || !cfg.publicKey || cfg.publicKey.includes('YOUR_')) {
-        console.warn('STILL EmailJS: config missing. Copy js/emailjs-config.example.js to js/emailjs-config.js');
+        console.warn('SOMEWHERE EmailJS: config missing. Copy js/emailjs-config.example.js to js/emailjs-config.js');
         return { customer: false, owner: false, skipped: true };
     }
     if (typeof emailjs === 'undefined') {
-        console.warn('STILL EmailJS: SDK not loaded');
+        console.warn('SOMEWHERE EmailJS: SDK not loaded');
         return { customer: false, owner: false, skipped: true };
     }
 
@@ -39,7 +39,7 @@ async function sendStillOrderEmails(order) {
         await emailjs.send(cfg.serviceId, cfg.customerTemplateId, templateParams);
         results.customer = true;
     } catch (err) {
-        console.error('STILL EmailJS customer email failed:', err);
+        console.error('SOMEWHERE EmailJS customer email failed:', err);
     }
 
     if (cfg.ownerTemplateId && cfg.ownerEmail && !cfg.ownerTemplateId.includes('YOUR_')) {
@@ -50,7 +50,7 @@ async function sendStillOrderEmails(order) {
             });
             results.owner = true;
         } catch (err) {
-            console.error('STILL EmailJS owner email failed:', err);
+            console.error('SOMEWHERE EmailJS owner email failed:', err);
         }
     }
 

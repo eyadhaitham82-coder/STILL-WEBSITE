@@ -67,12 +67,29 @@ body {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo-wordmark {
+    font-family: var(--font-heading);
+    font-size: clamp(0.82rem, 2.2vw, 1rem);
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--brand-brown);
+    line-height: 1;
+    white-space: nowrap;
+    padding-left: 0.34em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.logo-wordmark--light {
+    color: var(--brand-cream);
 }
 
 .logo img {
-    height: 34px;
-    width: auto;
-    display: block;
+    display: none;
 }
 
 .nav-menu {
@@ -366,28 +383,55 @@ body {
 
 /* Brand hero */
 .brand-hero {
+    position: relative;
     padding-top: 72px;
     min-height: 78vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(155deg, #26150F 0%, #1d100c 60%, #120b09 100%);
+    background-color: var(--brand-brown);
+    background-image:
+        linear-gradient(155deg, rgba(38, 21, 15, 0.88) 0%, rgba(29, 16, 12, 0.92) 55%, rgba(18, 11, 9, 0.96) 100%),
+        url('images/brand/somewhere-hero-texture.png');
+    background-size: cover;
+    background-position: center;
     color: var(--brand-cream);
+    overflow: hidden;
+}
+
+.brand-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(236, 230, 217, 0.06) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .brand-hero-inner {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
     padding: 3rem 1.25rem 4rem;
     text-align: center;
 }
 
+.brand-hero-wordmark {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 7.5vw, 3.25rem);
+    font-weight: 500;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--brand-cream);
+    line-height: 1.15;
+    margin: 0 auto 1.5rem;
+    padding-left: 0.38em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .brand-hero-logo {
-    width: min(92%, 520px);
-    height: auto;
-    margin: 0 auto 1.25rem;
-    display: block;
-    filter: brightness(1.12) contrast(1.02);
+    display: none;
 }
 
 .brand-hero-tagline {
@@ -1045,10 +1089,14 @@ body {
     margin-bottom: 1rem;
 }
 
+.footer-logo .logo-wordmark {
+    font-size: 1rem;
+    letter-spacing: 0.36em;
+    padding-left: 0.36em;
+}
+
 .footer-logo img {
-    height: 32px;
-    width: auto;
-    display: block;
+    display: none;
 }
 
 .footer-col p {
@@ -1602,9 +1650,15 @@ body {
         padding: 2rem 1rem 2.6rem;
     }
 
+    .brand-hero-wordmark {
+        font-size: clamp(1.5rem, 9vw, 2.4rem);
+        letter-spacing: 0.28em;
+        padding-left: 0.28em;
+        margin-bottom: 1.1rem;
+    }
+
     .brand-hero-logo {
-        width: min(96%, 430px);
-        margin-bottom: 1rem;
+        display: none;
     }
 
     .brand-hero-tagline {
@@ -1646,7 +1700,13 @@ body {
         padding: 1rem;
     }
     
+    .logo-wordmark {
+        font-size: 0.78rem;
+        letter-spacing: 0.26em;
+        padding-left: 0.26em;
+    }
+
     .logo img {
-        height: 30px;
+        display: none;
     }
 }

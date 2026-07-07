@@ -186,7 +186,7 @@ if (newsletterForm) {
         const email = e.target.querySelector('input[type="email"]').value;
         
         // Show success message (you can customize this)
-        alert(`Thank you for subscribing! We'll send updates to ${email}`);
+        alert(`You're on the list. We'll be in touch at ${email}.`);
         e.target.reset();
     });
 }
@@ -337,7 +337,7 @@ function addToCart(product) {
     }
     saveCart();
     updateCartUI();
-    showToast('Added to cart!');
+    showToast('Added to your bag.');
 }
 
 function removeFromCart(index) {
@@ -413,7 +413,7 @@ function getQuickViewProduct() {
     if (!modalProductName || !modalProductPrice) return null;
     const selectedSize = document.querySelector('.size-btn.selected');
     if (!selectedSize) {
-        showToast('Please select a size.');
+        showToast('Please choose a size.');
         return null;
     }
     const imageData = getCartItemImage();

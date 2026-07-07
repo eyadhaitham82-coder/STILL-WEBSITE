@@ -27,27 +27,27 @@
             </a>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="shop-all.html" class="nav-link">Shop All</a></li>
+                <li><a href="shop-all.html" class="nav-link">The Edit</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="icon-btn cart-btn" id="cartBtn" aria-label="Cart">
+                <button class="icon-btn cart-btn" id="cartBtn" aria-label="Bag">
                     🛒
                     <span class="cart-count" id="cartCount">0</span>
                 </button>
             </div>
             <div class="cart-dropdown" id="cartDropdown">
                 <div class="cart-dropdown-header">
-                    <h4>Your Cart</h4>
-                    <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">&times;</button>
+                    <h4>Your Bag</h4>
+                    <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close bag">&times;</button>
                 </div>
                 <div class="cart-items" id="cartItems">
-                    <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+                    <p class="cart-empty" id="cartEmpty">Your bag is empty.</p>
                 </div>
                 <div class="cart-dropdown-footer" id="cartFooter" style="display: none;">
-                    <a href="cart.html" class="cart-view-btn" id="cartViewBtn">View Cart</a>
-                    <a href="checkout.html" class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to Checkout</a>
+                    <a href="cart.html" class="cart-view-btn" id="cartViewBtn">View Bag</a>
+                    <a href="checkout.html" class="cart-checkout-btn" id="cartCheckoutBtn">Checkout</a>
                 </div>
             </div>
             <div class="hamburger">
@@ -58,8 +58,17 @@
         </div>
     </nav>
 
-    <!-- Category landing: first screen visitors see -->
-    <section class="category-landing" id="home" aria-label="Shop by category">
+    <section class="brand-hero" id="home" aria-label="SOMEWHERE introduction">
+        <div class="brand-hero-inner">
+            <img src="images/brand/somewhere-logo.png" alt="SOMEWHERE" class="brand-hero-logo">
+            <p class="brand-hero-tagline">Wear Your SOMEWHERE</p>
+            <p class="brand-hero-subline">Made to be felt.</p>
+            <a href="shop-all.html" class="brand-hero-cta">SHOP THE EDIT</a>
+        </div>
+    </section>
+
+    <!-- Category landing -->
+    <section class="category-landing" aria-label="Shop by category">
         <article class="category-block category-block--bottoms">
             <img src="images/categories/bottoms.png" alt="SOMEWHERE bottoms collection" class="category-block-img" width="800" height="1000">
             <div class="category-block-overlay">
@@ -82,7 +91,7 @@
             </div>
         </article>
         <div class="shop-all-cta">
-            <a href="shop-all.html" class="shop-all-btn">SHOP ALL</a>
+            <a href="shop-all.html" class="shop-all-btn">THE EDIT</a>
         </div>
     </section>
 
@@ -99,7 +108,7 @@
                     <p class="about-text">
                         Every piece is made to be felt and worn your way, from day to night.
                     </p>
-                    <button class="secondary-button">Discover More</button>
+                    <a href="#about" class="secondary-button">Our Story</a>
                 </div>
                 <div class="about-image">
                     <div class="placeholder-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); height: 500px;">
@@ -117,8 +126,8 @@
                 <h2>JOIN SOMEWHERE</h2>
                 <p>Be first to know about new drops, restocks, and exclusive edits.</p>
                 <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" class="cta-button">Subscribe</button>
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="cta-button">Join</button>
                 </form>
             </div>
         </div>
@@ -144,7 +153,7 @@
                         <li><a href="bottoms.html">Bottoms</a></li>
                         <li><a href="tops.html">Tops</a></li>
                         <li><a href="sets.html">Sets</a></li>
-                        <li><a href="shop-all.html">Shop All</a></li>
+                        <li><a href="shop-all.html">The Edit</a></li>
                     </ul>
                 </div>
                 

@@ -77,38 +77,38 @@
             <a href="index.html" class="logo" aria-label="SOMEWHERE"><img src="images/brand/somewhere-logo.png" alt="SOMEWHERE"></a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="shop-all.html" class="nav-link">Shop All</a></li>
+                <li><a href="shop-all.html" class="nav-link">The Edit</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Bag">🛒 <span class="cart-count" id="cartCount">0</span></a>
             </div>
         </div>
     </nav>
 
     <main class="checkout-page">
         <div class="container">
-            <a href="cart.html" class="checkout-back">← Back to cart</a>
+            <a href="cart.html" class="checkout-back">← Back to bag</a>
             <h1>Checkout</h1>
 
             <div id="checkoutEmpty" style="display: none;">
-                <p style="margin-bottom: 1rem; color: #666;">Your cart is empty. <a href="shop-all.html" style="color: var(--accent-color);">Continue shopping</a>.</p>
+                <p style="margin-bottom: 1rem; color: #666;">Your bag is empty. <a href="shop-all.html" style="color: var(--accent-color);">Explore The Edit</a>.</p>
             </div>
 
             <div id="checkoutContent">
                 <div class="checkout-order" id="checkoutOrder">
-                    <h3>Order summary</h3>
+                    <h3>Your order</h3>
                     <div id="checkoutItems"></div>
                     <div class="checkout-order-total" id="checkoutTotal">Subtotal: 0 EGP</div>
                 </div>
 
                 <form class="checkout-form" id="checkoutForm" name="checkout" method="POST" action="https://api.sheetmonkey.io/form/a9f4qe4rpHxXmCc3ycSqkV">
-                    <input type="hidden" name="siteSource" value="still-website-checkout">
+                    <input type="hidden" name="siteSource" value="somewhere-website-checkout">
                     <input type="hidden" id="orderId" name="orderId" value="">
                     <input type="hidden" id="orderItems" name="orderItems" value="">
                     <input type="hidden" id="orderSubtotal" name="orderSubtotal" value="">
-                    <h3 style="margin-bottom: 1rem;">Shipping details</h3>
+                    <h3 style="margin-bottom: 1rem;">Delivery details</h3>
                     <div class="form-row">
                         <div>
                             <label for="firstName">First name</label>
@@ -136,8 +136,8 @@
                         <input type="text" id="city" name="city" required>
                     </div>
                     <div>
-                        <label for="notes">Order notes (optional)</label>
-                        <textarea id="notes" name="notes" rows="3" placeholder="Special instructions..."></textarea>
+                        <label for="notes">Notes (optional)</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Delivery notes or special requests…"></textarea>
                     </div>
 
                     <div class="payment-methods">
@@ -176,7 +176,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="checkout-submit">Place order</button>
+                    <button type="submit" class="checkout-submit">Complete Order</button>
                 </form>
             </div>
         </div>
@@ -313,7 +313,7 @@
                 const submitBtn = checkoutForm.querySelector('.checkout-submit');
                 if (submitBtn) {
                     submitBtn.disabled = true;
-                    submitBtn.textContent = 'Placing order…';
+                    submitBtn.textContent = 'Completing order…';
                 }
 
                 try {
@@ -360,22 +360,22 @@
                     }
 
                     let thankYou = method === 'visa'
-                        ? 'Thank you! Your order has been received. Payment will be processed securely.'
-                        : 'Thank you! Your order has been received. Pay with cash on delivery.';
+                        ? 'Thank you. Your order is confirmed — payment will be processed securely.'
+                        : 'Thank you. Your order is confirmed — pay on delivery.';
                     if (emailSent) {
-                        thankYou += ' A confirmation email was sent to ' + email + '.';
+                        thankYou += ' A confirmation was sent to ' + email + '.';
                     } else if (email) {
-                        thankYou += ' (We could not send the confirmation email — we will still process your order.)';
+                        thankYou += ' (We couldn\'t send a confirmation email — your order will still be processed.)';
                     }
                     alert(thankYou);
                     localStorage.setItem(CART_KEY, '[]');
                     window.location.href = 'index.html';
                 } catch (error) {
-                    alert('There was an issue sending your order. Please try again.');
+                    alert('Something went wrong. Please try again, or reach out if the issue continues.');
                 } finally {
                     if (submitBtn) {
                         submitBtn.disabled = false;
-                        submitBtn.textContent = 'Place order';
+                        submitBtn.textContent = 'Complete Order';
                     }
                 }
             });

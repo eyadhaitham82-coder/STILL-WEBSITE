@@ -1,22 +1,26 @@
-/* Haas Grot Disp R Trial — logo typography */
+/* Haas Grot Disp R Trial — brand typography (45 Light + 55 Roman) */
 @font-face {
     font-family: 'Haas Grot Disp R';
-    src: local('Haas Grot Disp R Trial 55 Roman'),
-         url('fonts/HaasGrotDispRTrial-55Roman.woff2') format('woff2'),
-         url('fonts/HaasGrotDispRTrial-55Roman.woff') format('woff'),
-         url('fonts/HaasGrotDispRTrial-55Roman.otf') format('opentype');
-    font-weight: 550;
+    src: local('Haas Grot Disp R Trial 45 Light'),
+         local('HaasGrotDispRTrial-45Light'),
+         url('fonts/HaasGrotDispRTrial-45Light.woff2') format('woff2'),
+         url('fonts/HaasGrotDispRTrial-45Light.woff') format('woff'),
+         url('fonts/HaasGrotDispRTrial-45Light.otf') format('opentype'),
+         url('fonts/Haas Grot Disp R Trial 45 Light.otf') format('opentype');
+    font-weight: 200 450;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Haas Grot Disp R';
-    src: local('Haas Grot Disp R Trial 45 Light'),
-         url('fonts/HaasGrotDispRTrial-45Light.woff2') format('woff2'),
-         url('fonts/HaasGrotDispRTrial-45Light.woff') format('woff'),
-         url('fonts/HaasGrotDispRTrial-45Light.otf') format('opentype');
-    font-weight: 300;
+    src: local('Haas Grot Disp R Trial 55 Roman'),
+         local('HaasGrotDispRTrial-55Roman'),
+         url('fonts/HaasGrotDispRTrial-55Roman.woff2') format('woff2'),
+         url('fonts/HaasGrotDispRTrial-55Roman.woff') format('woff'),
+         url('fonts/HaasGrotDispRTrial-55Roman.otf') format('opentype'),
+         url('fonts/Haas Grot Disp R Trial 55 Roman.otf') format('opentype');
+    font-weight: 451 700;
     font-style: normal;
     font-display: swap;
 }
@@ -45,20 +49,36 @@
     --medium-gray: #d5cfc3;
     --surface-cream: #ECE6D9;
 
-    --font-logo: 'Haas Grot Disp R', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-heading: 'Haas Grot Disp R', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-brand: 'Haas Grot Disp R', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-logo: var(--font-brand);
+    --font-heading: var(--font-brand);
+    --font-body: var(--font-brand);
+    --font-weight-light: 300;
+    --font-weight-roman: 550;
     --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
     font-family: var(--font-body);
+    font-weight: var(--font-weight-light);
     color: var(--text-color);
     line-height: 1.65;
     overflow-x: hidden;
     background: var(--brand-cream);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-roman);
 }
 
 .container {
@@ -126,12 +146,12 @@ body {
 }
 
 .logo-wordmark-some {
-    font-weight: 550;
+    font-weight: var(--font-weight-roman);
     letter-spacing: 0.14em;
 }
 
 .logo-wordmark-where {
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     letter-spacing: 0.18em;
 }
 
@@ -160,7 +180,8 @@ body {
 .nav-link {
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 300;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-light);
     font-size: 0.82rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -478,7 +499,7 @@ body {
 .brand-hero-tagline {
     font-family: var(--font-heading);
     font-size: clamp(0.95rem, 3vw, 1.25rem);
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 0.35rem;
@@ -489,7 +510,7 @@ body {
     font-size: 0.78rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     color: rgba(236, 230, 217, 0.62);
     margin-bottom: 2rem;
 }
@@ -499,7 +520,8 @@ body {
     text-decoration: none;
     padding: 0.85rem 2.6rem;
     font-size: 0.72rem;
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
+    font-family: var(--font-body);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--brand-brown);
@@ -570,7 +592,7 @@ body {
 .category-block-title {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 9vw, 3rem);
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     color: var(--brand-white);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -587,7 +609,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.75);
     font-family: var(--font-body);
     font-size: 0.7rem;
-    font-weight: 400;
+    font-weight: var(--font-weight-light);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
@@ -643,7 +665,7 @@ body {
 .shop-all-title {
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 5vw, 2.5rem);
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     color: var(--brand-brown);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -653,7 +675,8 @@ body {
 .shop-all-subtitle {
     color: var(--text-muted);
     font-size: 1rem;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
+    font-weight: var(--font-weight-light);
 }
 
 .shop-all-section {
@@ -678,7 +701,7 @@ body {
 .shop-all-section-title {
     font-family: var(--font-heading);
     font-size: 1.75rem;
-    font-weight: 500;
+    font-weight: var(--font-weight-roman);
     color: var(--primary-color);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -742,7 +765,7 @@ body {
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 7vw, 2.5rem);
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     color: var(--brand-white);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -900,7 +923,7 @@ body {
 .section-title {
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 5vw, 2.5rem);
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     text-align: center;
     margin-bottom: 1rem;
     color: var(--brand-brown);
@@ -913,6 +936,7 @@ body {
     color: var(--text-muted);
     font-size: 1.1rem;
     margin-bottom: 4rem;
+    font-weight: var(--font-weight-light);
 }
 
 .collection-grid {
@@ -1011,11 +1035,12 @@ body {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
+    font-weight: var(--font-weight-roman);
 }
 
 .price {
-    font-weight: 600;
+    font-weight: var(--font-weight-roman);
     color: var(--accent-color);
     font-size: 1.1rem;
 }
@@ -1043,14 +1068,14 @@ body {
     line-height: 1.9;
     color: var(--text-muted);
     margin-bottom: 1.25rem;
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
 }
 
 .secondary-button {
     display: inline-block;
     padding: 0.85rem 2.4rem;
     font-size: 0.72rem;
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     border: 1px solid var(--primary-color);
     background: transparent;
     color: var(--primary-color);
@@ -1100,14 +1125,14 @@ body {
 .newsletter-content h2 {
     font-family: var(--font-heading);
     font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
 }
 
 .newsletter-content p {
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     font-size: 0.95rem;
     letter-spacing: 0.04em;
     margin-bottom: 2rem;
@@ -1196,7 +1221,7 @@ body {
 .footer-col h4 {
     margin-bottom: 1.5rem;
     font-size: 0.78rem;
-    font-weight: 400;
+    font-weight: var(--font-weight-roman);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--brand-cream);
